@@ -1,6 +1,6 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'midway';
 
-export type DefaultConfig = PowerPartial<EggAppConfig>
+export type DefaultConfig = PowerPartial<EggAppConfig>;
 
 export default (appInfo: EggAppInfo) => {
   const config = {} as DefaultConfig;
@@ -11,6 +11,8 @@ export default (appInfo: EggAppInfo) => {
   // add your config here
   config.middleware = [
   ];
+
+  config.peng = 'xiaohua';
 
   return config;
 };
