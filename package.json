@@ -1,7 +1,7 @@
 {
   "name": "xiaohua.life",
   "version": "1.0.0",
-  "description": "{{description}}",
+  "description": "My blog, visit http://www.xiaohua.life",
   "private": true,
   "dependencies": {
     "midway": "^1.0.0",
@@ -48,6 +48,6 @@
     "type": "git",
     "url": ""
   },
-  "author": "anonymous",
+  "author": "pengxiaohua",
   "license": "MIT"
 }
