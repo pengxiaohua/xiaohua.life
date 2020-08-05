@@ -1,12 +1,6 @@
 # xiaohua.life
 
-{{description}}
-
-## QuickStart
-
-<!-- add docs here for user -->
-
-see [midway docs][midway] for more detail.
+My Blog http://www.xiaohua.life
 
 ### Development
 
