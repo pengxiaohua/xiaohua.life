@@ -1,15 +1,24 @@
-import { provide } from 'midway';
-import { IUserService, IUserOptions, IUserResult } from '../interface';
+import { provide, inject } from 'midway'
+import { IUserService, IUserListOptions, IUserListResult } from '../interface'
+import { IUserModel } from '../model/user'
 
 @provide('userService')
 export class UserService implements IUserService {
 
-  async getUser(options: IUserOptions): Promise<IUserResult> {
+  @inject()
+  UserModel: IUserModel
+
+  async list(options: IUserListOptions): Promise<IUserListResult> {
+    const result = await this.UserModel
+    .scope('avaliable')
+    .findAndCountAll({
+      limit: options.limit,
+      offset: options.offset,
+    })
+
     return {
-      id: options.id,
-      username: 'mockedName',
-      phone: '12345678901',
-      email: 'xxx.xxx@xxx.com',
-    };
+      userList: result.rows,
+      totalCount: result.count,
+    }
   }
 }

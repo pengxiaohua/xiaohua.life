@@ -1,18 +1,23 @@
-import { EggAppConfig, EggAppInfo, PowerPartial } from 'midway';
+module.exports = (appInfo: any) => {
+    const config: any = (exports = {})
 
-export type DefaultConfig = PowerPartial<EggAppConfig>;
+    // use for cookie sign key, should change to your own and keep security
+    config.keys = appInfo.name + '_1539671912752_2826'
 
-export default (appInfo: EggAppInfo) => {
-  const config = {} as DefaultConfig;
+    // add your config here
+    config.middleware = []
 
-  // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1595608319804_1986';
+    config.sequelize = {
+        host: 'localhost',
+        port: '3306',
+        user: 'root',
+        password: '12345678',
+        database: 'myblog',
+        dialect: 'mysql',
+    }
 
-  // add your config here
-  config.middleware = [
-  ];
+    // close csrf for unit test
+    config.security = { csrf: false }
 
-  config.peng = 'xiaohua';
-
-  return config;
-};
+    return config
+}

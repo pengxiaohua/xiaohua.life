@@ -1,41 +1,35 @@
 {
   "name": "xiaohua.life",
   "version": "1.0.0",
-  "description": "My blog, visit http://www.xiaohua.life",
+  "description": "My blog http://www.xiaohua.life",
   "private": true,
   "dependencies": {
+    "egg": "^2.15.1",
     "midway": "^1.0.0",
-    "egg-scripts": "^2.10.0"
+    "mysql2": "^1.7.0",
+    "sequelize": "^4.44.4",
+    "sequelize-typescript": "^0.6.11"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^10.5.5",
-    "cross-env": "^6.0.0",
-    "egg-ci": "^1.8.0",
     "midway-bin": "1",
-    "midway-mock": "1",
-    "tslib": "^1.8.1",
-    "tslint-midway-contrib": "1",
-    "ts-node": "^8.3.0",
-    "tslint": "^5.11.0",
-    "typescript": "^3.5.0"
+    "midway-demo-lib": "1",
+    "ts-node": "^8.10.2",
+    "tslint": "^5.12.1",
+    "typescript": "^3.9.7"
   },
   "engines": {
-    "node": ">=10.16.0"
+    "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=midway-server-xiaohua.life --framework=midway --ts",
-    "stop": "egg-scripts stop --title=midway-server-xiaohua.life",
-    "start_build": "npm run build && cross-env NODE_ENV=development midway-bin dev",
-    "clean": "midway-bin clean",
-    "dev": "cross-env NODE_ENV=local midway-bin dev --ts",
-    "debug": "cross-env NODE_ENV=local midway-bin debug --ts",
-    "test": "npm run lint && midway-bin test --ts",
+    "start": "set NODE_ENV=local && midway-bin dev --ts",
+    "debug": "set NODE_ENV=local && midway-bin debug --ts",
+    "dev": "NODE_ENV=local && midway-bin dev --ts",
+    "debugger": "NODE_ENV=local midway-bin debug --ts",
+    "test": "midway-bin test --ts",
     "cov": "midway-bin cov --ts",
-    "lint": "tslint --fix -p tsconfig.json -t stylish",
-    "ci": "npm run cov",
+    "ci": "midway-bin cov --ts",
     "build": "midway-bin build -c",
-    "autod": "midway-bin autod"
+    "lint": "tslint --fix -p tsconfig.json -t stylish"
   },
   "ci": {
     "version": "10"

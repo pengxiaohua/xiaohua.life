@@ -9,4 +9,4 @@ export const development = {
     'interface.ts',
   ],
   overrideDefault: true,
-};
+}

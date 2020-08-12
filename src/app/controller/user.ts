@@ -1,20 +1,25 @@
-import { Context, controller, get, inject, provide } from 'midway';
-import { IUserService, IUserResult } from '../../interface';
+import { Context, controller, get, inject, provide } from 'midway'
+import { IUserService } from '../../interface'
 
 @provide()
-@controller('/user')
+@controller('/users')
 export class UserController {
 
   @inject()
-  ctx: Context;
+  ctx: Context
 
   @inject('userService')
-  service: IUserService;
+  service: IUserService
 
-  @get('/:id')
-  async getUser(): Promise<void> {
-    const id: number = this.ctx.params.id;
-    const user: IUserResult = await this.service.getUser({id});
-    this.ctx.body = {success: true, message: 'OK', data: user};
+  @get('/')
+  async index() {
+    const { limit, offset } = this.ctx.query
+    const query = {
+      limit: parseInt(limit, 10) || 10,
+      offset: parseInt(offset, 10) || 0
+    }
+
+    const result = await this.service.list(query)
+    this.ctx.body = result
   }
 }
