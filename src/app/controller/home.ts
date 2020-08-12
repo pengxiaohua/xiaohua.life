@@ -1,18 +1,15 @@
-import { Context, inject, controller, get, provide } from 'midway';
+import { Context, controller, get, provide } from 'midway'
 
+/**
+ * 根路径
+ * @export
+ * @class HomeController
+ */
 @provide()
 @controller('/')
 export class HomeController {
-
-  @inject()
-  ctx: Context;
-
-  @inject()
-  appDir;
-
-  @get('/')
-  async index() {
-    console.log('appDir: ', this.appDir);
-    this.ctx.body = `Welcome to midwayjs!`;
-  }
+    @get('/')
+    async index(ctx: Context) {
+        ctx.body = `Hello you midwayjs !`
+    }
 }
