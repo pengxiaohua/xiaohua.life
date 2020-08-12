@@ -16,7 +16,7 @@ export interface IUserResult {
   gender: number
   status: number
   createdTime: Date
-  modifiedTime: Date
+  updatedTime: Date
 }
 
 // user list service result
