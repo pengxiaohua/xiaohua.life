@@ -2,9 +2,8 @@
 
 My Blog http://www.xiaohua.life
 
-- WEB 前端博客页面
-- SERVER 博客后端接口服务
-- ADMIN 博客后台管理系统
+- web 前端博客页面
+- admin 博客后台管理系统
 
 ### Development
 
