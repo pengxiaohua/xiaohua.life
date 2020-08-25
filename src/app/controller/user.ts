@@ -1,8 +1,8 @@
 import { Context, controller, get, inject, provide } from 'midway'
-import { IUserService } from '../../interface'
+import { IUserService } from '../../interface/user'
 
 @provide()
-@controller('/users')
+@controller('/api/users')
 export class UserController {
 
   @inject()

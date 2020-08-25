@@ -1,22 +1,22 @@
 import { providerWrapper } from 'midway'
 import { DataType, Table, Model, Column, CreatedAt, UpdatedAt, Scopes } from 'sequelize-typescript'
 
-const { STRING, INTEGER } = DataType
+const { STRING, INTEGER, TEXT } = DataType
 
 // using factory style to provide Model because most useful
 // sequelize methods are static in Model class. If you use
 // @provide style, this class will be initialized when injected.
-export const factory = () => UserModel
+export const factory = () => BlogModel
 providerWrapper([
     {
-      id: 'UserModel',
+      id: 'BlogModel',
       provider: factory
     },
 ])
 
 // you need to export the type of Model class to ensure
 // type-safety outside
-export type IUserModel = typeof UserModel
+export type IBlogModel = typeof BlogModel
 
 // 等同于where，默认展示未删除的数据
 @Scopes({
@@ -28,31 +28,38 @@ export type IUserModel = typeof UserModel
 })
 @Table({
   freezeTableName: true,
-  tableName: 'users'
+  tableName: 'blogs'
 })
-export class UserModel extends Model<UserModel> {
+export class BlogModel extends Model<BlogModel> {
   @Column({
     type: INTEGER(11),
     primaryKey: true,
     autoIncrement: true,
-    comment: 'user id'
+    comment: 'blog id'
   })
   id: number
 
   @Column({
-    field: 'user_name',
-    type: STRING(255),
+    field: 'title',
+    type: STRING(50),
     allowNull: false,
-    comment: '用户名'
+    comment: 'blog title'
   })
-  userName: string
+  title: string
 
   @Column({
-    type: INTEGER(2),
+    field: 'content',
+    type: TEXT,
     allowNull: false,
-    comment: '性别，1男性，0女性'
+    comment: '博客内容'
   })
-  gender: number
+  content: string
+
+  @Column({
+    type: STRING(50),
+    comment: 'tag'
+  })
+  tags: string
 
   @Column({
     type: INTEGER(2),
