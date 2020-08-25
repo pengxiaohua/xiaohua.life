@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize-typescript'
 import { provide, scope, ScopeEnum } from 'midway'
 
 import { UserModel } from './user'
+import { BlogModel } from './blog'
 
 interface ISequelizeConfig {
   host: string
@@ -26,18 +27,20 @@ export class DB {
         host: config.host,
         port: config.port,
         timezone: '+08:00',
-        logging: false,
+        logging: console.log,
         operatorsAliases: false,
       })
 
     // add models here before using them
     DB.sequelize.addModels([
       UserModel,
+      BlogModel
     ])
 
     try {
-      // 是否强制新建数据库表
-      // await DB.sequelize.sync({force: true});
+      // 是否每次都强制新建数据库表
+      // await DB.sequelize.sync({force: true})
+      await DB.sequelize.sync({force: false})
       await DB.sequelize.authenticate()
     } catch (error) {
       error.message = `DB connection error: ${error.message}`

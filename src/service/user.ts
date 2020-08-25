@@ -1,5 +1,5 @@
 import { provide, inject } from 'midway'
-import { IUserService, IUserListOptions, IUserListResult } from '../interface'
+import { IUserService, IUserListOptions, IUserListResult } from '../interface/user'
 import { IUserModel } from '../model/user'
 
 @provide('userService')
