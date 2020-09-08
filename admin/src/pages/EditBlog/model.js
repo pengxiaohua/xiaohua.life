@@ -2,7 +2,9 @@ import { createBlog, updateBlog, getBlogDetail } from './service';
 
 const Model = {
   namespace: 'editBlog',
-  state: {},
+  state: {
+    blogDetail: {},
+  },
   effects: {
     *create({ payload }, { call }) {
       const res = yield call(createBlog, payload);
@@ -14,15 +16,22 @@ const Model = {
       return res;
     },
 
-    *blogDetail({ payload }, { call }) {
+    *blogDetail({ payload }, { call, put }) {
       const res = yield call(getBlogDetail, payload);
+      yield put({
+        type: 'queryDetail',
+        payload: res || {},
+      });
       return res;
     },
   },
 
   reducers: {
-    queryList(state, action) {
-      return { ...state, ...action.payload };
+    queryDetail(state, action) {
+      return {
+        ...state,
+        blogDetail: action.payload,
+      };
     },
   },
 };

@@ -115,10 +115,17 @@ export default {
               authority: ['admin'],
             },
             {
-              name: '新增博客',
+              name: '编辑博客',
               path: '/blogs/edit',
-              component: './AddBlog',
+              component: './EditBlog',
               hideInMenu: true,
+              authority: ['admin'],
+            },
+            {
+              name: '评论管理',
+              path: '/reply',
+              icon: 'message',
+              component: './Reply',
               authority: ['admin'],
             },
             {
