@@ -129,6 +129,13 @@ export default {
               authority: ['admin'],
             },
             {
+              name: '分类管理',
+              path: '/category',
+              icon: 'appstore',
+              component: './Category',
+              authority: ['admin'],
+            },
+            {
               component: './404',
             },
           ],
