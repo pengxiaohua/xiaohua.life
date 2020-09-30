@@ -10,7 +10,7 @@ import { router } from 'umi';
 
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect } from 'dva';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import styles from './style.less';
 
 const Info = ({ title, value, bordered }) => (
@@ -43,11 +43,11 @@ const ListContent = ({ data: { createdTime, updatedTime, status } }) => {
     <div className={styles.listContent}>
       <div className={styles.listContentItem}>
         <span>创建时间</span>
-        <p>{moment(createdTime).format('YYYY-MM-DD HH:mm:ss')}</p>
+        <p>{dayjs(createdTime).format('YYYY-MM-DD HH:mm:ss')}</p>
       </div>
       <div className={styles.listContentItem}>
         <span>最后修改</span>
-        <p>{moment(updatedTime).format('YYYY-MM-DD HH:mm:ss')}</p>
+        <p>{dayjs(updatedTime).format('YYYY-MM-DD HH:mm:ss')}</p>
       </div>
       <div className={styles.listContentItem}>
         <span>当前状态</span>
