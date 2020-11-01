@@ -1,14 +1,14 @@
-import { addFakeList, queryBlogList, removeFakeList, updateFakeList } from './service';
+import { addTag, queryTagList, removeTag, updateTag } from './service';
 
 const Model = {
-  namespace: 'blogList',
+  namespace: 'tagList',
   state: {
-    blogList: [],
+    tagList: [],
     totalCount: 0,
   },
   effects: {
     *fetch({ payload }, { call, put }) {
-      const response = yield call(queryBlogList, payload);
+      const response = yield call(queryTagList, payload);
       yield put({
         type: 'queryList',
         payload: response,
@@ -16,7 +16,7 @@ const Model = {
     },
 
     *appendFetch({ payload }, { call, put }) {
-      const response = yield call(queryBlogList, payload);
+      const response = yield call(queryTagList, payload);
       yield put({
         type: 'appendList',
         payload: Array.isArray(response) ? response : [],
@@ -27,9 +27,9 @@ const Model = {
       let callback;
 
       if (payload.id) {
-        callback = Object.keys(payload).length === 1 ? removeFakeList : updateFakeList;
+        callback = Object.keys(payload).length === 1 ? removeTag : updateTag;
       } else {
-        callback = addFakeList;
+        callback = addTag;
       }
 
       const response = yield call(callback, payload); // post
