@@ -1,5 +1,5 @@
 import { providerWrapper } from 'midway';
-import { DataType, Table, Model, Column, CreatedAt, UpdatedAt } from 'sequelize-typescript';
+import { DataType, Table, Model, Column, CreatedAt, UpdatedAt, Scopes } from 'sequelize-typescript';
 
 const { STRING, INTEGER } = DataType;
 
