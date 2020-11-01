@@ -1,22 +1,23 @@
-import { Sequelize } from 'sequelize-typescript'
-import { provide, scope, ScopeEnum } from 'midway'
+import { Sequelize } from 'sequelize-typescript';
+import { provide, scope, ScopeEnum } from 'midway';
 
-import { UserModel } from './user'
-import { BlogModel } from './blog'
+import { UserModel } from './user';
+import { BlogModel } from './blog';
+import { TagModel } from './tag';
 
 interface ISequelizeConfig {
-  host: string
-  port: number
-  user: string
-  password: string
-  database: string
-  dialect: string
+  host: string;
+  port: number;
+  user: string;
+  password: string;
+  database: string;
+  dialect: string;
 }
 
 @scope(ScopeEnum.Singleton)
 @provide('DB')
 export class DB {
-  public static sequelize: Sequelize
+  public static sequelize: Sequelize;
 
   public static async initDB(config: ISequelizeConfig) {
     DB.sequelize = new Sequelize({
@@ -29,22 +30,23 @@ export class DB {
         timezone: '+08:00',
         logging: console.log,
         operatorsAliases: false,
-      })
+      });
 
     // add models here before using them
     DB.sequelize.addModels([
       UserModel,
-      BlogModel
-    ])
+      BlogModel,
+      TagModel
+    ]);
 
     try {
       // 是否每次都强制新建数据库表
       // await DB.sequelize.sync({force: true})
-      await DB.sequelize.sync({force: false})
-      await DB.sequelize.authenticate()
+      await DB.sequelize.sync({force: false});
+      await DB.sequelize.authenticate();
     } catch (error) {
-      error.message = `DB connection error: ${error.message}`
-      throw error
+      error.message = `DB connection error: ${error.message}`;
+      throw error;
     }
   }
 }
