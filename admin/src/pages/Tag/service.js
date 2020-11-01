@@ -1,13 +1,13 @@
 import request from '@/utils/request';
 
-export async function queryBlogList(params) {
-  return request('/api/blogs', {
+export async function queryTagList(params) {
+  return request('/api/tags', {
     params,
   });
 }
-export async function removeFakeList(params) {
+export async function removeTag(params) {
   const { count = 5, ...restParams } = params;
-  return request('/api/fake_list', {
+  return request('/api/tagList', {
     method: 'POST',
     params: {
       count,
@@ -15,9 +15,9 @@ export async function removeFakeList(params) {
     data: { ...restParams, method: 'delete' },
   });
 }
-export async function addFakeList(params) {
+export async function addTag(params) {
   const { count = 5, ...restParams } = params;
-  return request('/api/fake_list', {
+  return request('/api/tagList', {
     method: 'POST',
     params: {
       count,
@@ -25,9 +25,9 @@ export async function addFakeList(params) {
     data: { ...restParams, method: 'post' },
   });
 }
-export async function updateFakeList(params) {
+export async function updateTag(params) {
   const { count = 5, ...restParams } = params;
-  return request('/api/fake_list', {
+  return request('/api/tagList', {
     method: 'POST',
     params: {
       count,
