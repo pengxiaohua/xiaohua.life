@@ -130,7 +130,7 @@ export default {
             },
             {
               name: '标签管理',
-              path: '/tag',
+              path: '/tags',
               icon: 'appstore',
               component: './Tag',
               authority: ['admin'],
