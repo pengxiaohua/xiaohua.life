@@ -1,4 +1,4 @@
-import { addTag, queryTagList, removeTag, updateTag } from './service';
+import { addTag, queryTagList, updateTag } from './service';
 
 const Model = {
   namespace: 'tagList',
@@ -10,39 +10,40 @@ const Model = {
     *fetch({ payload }, { call, put }) {
       const response = yield call(queryTagList, payload);
       yield put({
-        type: 'queryList',
+        type: 'save',
         payload: response,
       });
     },
 
-    *appendFetch({ payload }, { call, put }) {
-      const response = yield call(queryTagList, payload);
-      yield put({
-        type: 'appendList',
-        payload: Array.isArray(response) ? response : [],
-      });
-    },
-
-    *submit({ payload }, { call, put }) {
-      let callback;
-
-      if (payload.id) {
-        callback = Object.keys(payload).length === 1 ? removeTag : updateTag;
-      } else {
-        callback = addTag;
+    *update({ payload }, { call, put }) {
+      const res = yield call(updateTag, payload);
+      if (res) {
+        yield put({
+          type: 'fetch',
+          payload: {
+            offset: 0,
+            limit: 10,
+          },
+        });
       }
+    },
 
-      const response = yield call(callback, payload); // post
-
-      yield put({
-        type: 'queryList',
-        payload: response,
-      });
+    *add({ payload }, { call, put }) {
+      const res = yield call(addTag, payload);
+      if (res) {
+        yield put({
+          type: 'save',
+          payload: res,
+        });
+      }
     },
   },
   reducers: {
-    queryList(state, action) {
-      return { ...state, ...action.payload };
+    save(state, action) {
+      return {
+        ...state,
+        ...action.payload,
+      };
     },
 
     appendList(

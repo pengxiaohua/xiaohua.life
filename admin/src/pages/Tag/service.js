@@ -5,9 +5,10 @@ export async function queryTagList(params) {
     params,
   });
 }
+
 export async function removeTag(params) {
   const { count = 5, ...restParams } = params;
-  return request('/api/tagList', {
+  return request('/api/tags/delete', {
     method: 'POST',
     params: {
       count,
@@ -15,23 +16,17 @@ export async function removeTag(params) {
     data: { ...restParams, method: 'delete' },
   });
 }
+
 export async function addTag(params) {
-  const { count = 5, ...restParams } = params;
-  return request('/api/tagList', {
+  return request('/api/tags/create', {
     method: 'POST',
-    params: {
-      count,
-    },
-    data: { ...restParams, method: 'post' },
+    data: params,
   });
 }
+
 export async function updateTag(params) {
-  const { count = 5, ...restParams } = params;
-  return request('/api/tagList', {
+  return request('/api/tags/update', {
     method: 'POST',
-    params: {
-      count,
-    },
-    data: { ...restParams, method: 'update' },
+    data: params,
   });
 }

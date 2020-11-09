@@ -103,8 +103,6 @@ export const TagList = props => {
     });
   }, [1]);
   const paginationProps = {
-    showSizeChanger: true,
-    showQuickJumper: true,
     pageSize: 10,
     totalCount,
   };
@@ -131,7 +129,7 @@ export const TagList = props => {
     },
     {
       title: '修改时间',
-      dataIndex: 'createdTime',
+      dataIndex: 'updatedTime',
       render: time => dayjs(time).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
@@ -146,7 +144,6 @@ export const TagList = props => {
     },
   ];
 
-  // TODO: delete
   const handleAdd = () => {
     // const newData = {
     //   key: totalCount,
@@ -161,13 +158,14 @@ export const TagList = props => {
   };
 
   const handleSave = row => {
-    const newData = tagList;
-    const index = newData.findIndex(item => row.key === item.key);
-    const item = newData[index];
-    newData.splice(index, 1, { ...item, ...row });
-    // this.setState({
-    //   dataSource: newData,
-    // });
+    const { id, title } = row;
+    dispatch({
+      type: 'tagList/update',
+      payload: {
+        id,
+        updates: { title },
+      },
+    });
   };
 
   const components = {
@@ -176,6 +174,7 @@ export const TagList = props => {
       cell: EditableCell,
     },
   };
+
   const newColumns = columns.map(col => {
     if (!col.editable) {
       return col;
